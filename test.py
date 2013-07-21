@@ -65,29 +65,12 @@ On Ubuntu or Debian install package 'python-coverage'.
 
     # Build the test suite
     loader = unittest.TestLoader()
-    # if args:
-        # suite = unittest.TestSuite()
-        # for module in [ 'tests.'+name for name in args ]:
-            # print module
-            # test = loader.loadTestsFromName(module)
-            # suite.addTest(test)
-    # else:
     suite = tests.load_tests(loader, None, None)
 
     # And run it
     unittest.installHandler() # Fancy handling for ^C during test
     unittest.TextTestRunner(verbosity=2).run(suite)
 
-    # Check the modules were loaded from the right location
-    # (so no testing based on modules from a previous installed version...)
-    # mylib = os.path.abspath('./zim')
-    # for module in [m for m in sys.modules.keys()
-                                        # if m == 'zim' or m.startswith('zim.')]:
-                # if sys.modules[module] is None:
-                    # continue
-                # file = sys.modules[module].__file__
-                # assert file.startswith(mylib), \
-                    # 'Module %s was loaded from %s' % (module, file)
     # Create coverage output if asked to do so
     if coverage:
         coverage.stop()
